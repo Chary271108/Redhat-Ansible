@@ -1,0 +1,13 @@
+---
+- hosts: web
+  tasks:
+    - name: copy file to server
+      copy: src=script.sh dest=/home/ansible/script.sh mode=0755
+    - name: Run the script
+      command: /home/ansible/script.sh
+      ignore_errors: yes
+      register: com_out
+    - debug:
+       msg="STDOUT - {{ com_out.stdout }}"
+    - debug:
+       msg="STDERR - {{ com_out.stderr }}"
